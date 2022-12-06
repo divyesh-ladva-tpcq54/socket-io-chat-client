@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js" integrity="sha384-/KNQL8Nu5gCHLqwqfQjA689Hhoqgi2S84SNUxC3roTe4EhJ9AfLkp8QiQcU8AMzI" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <title>Socket io chat app demo</title>
+</head>
+<body>
+  <div id="root">
+    <div id="user-info">
+      <div class="controls">
+        <div class="user-controls">
+          <h3>User info</h3>
+          <input type="text" name="control-username" id="control-username">
+          <button id="control-user-create">Register</button>
+          <button id="control-user-login">Login</button>
+          <button id="control-user-logout">Logout</button>
+        </div>
+      </div>
+      <div class="messages">
+        <div class="message">User created <span class="chat-name-tag">dvdagreat</span></div>
+      </div>
+    </div>
+    <div id="personal-chats">
+      <div class="controls">
+        <div class="control-group">
+          <h3>Personal Chats</h3>
+          <input type="text" name="chats-pm-chat-name" placeholder="user's name" id="chats-pm-chat-name">
+          <br/>
+          <input type="text" name="chats-pm-chat-message" placeholder="message" id="chats-pm-chat-message">
+          <br/>
+          <button id="chats-send-personal-message">Send</button>
+        </div>
+      </div>
+      <div class="messages">
+        <h3>Messages</h3>
+        <div class="message">demo message <span class="chat-name-tag">wolfpack</span></div>
+      </div>
+    </div>
+    <div id="group-chats">
+      <div class="controls">
+        <div class="control-group">
+          <h3>Join Groups</h3>
+          <input type="text" name="control-group-chat-name" id="control-group-chat-name">
+          <br/><button id="control-group-chat-create">Create</button>
+          <button id="control-group-chat-join">Join</button>
+          <button id="control-group-chat-leave">Leave</button>
+        </div>
+        <div class="control-group">
+          <h3>Group Chats</h3>
+          <input type="text" name="chats-group-chat-name" placeholder="group name" id="chats-group-chat-name">
+          <br/>
+          <input type="text" name="chats-group-chat-message" placeholder="message" id="chats-group-chat-message">
+          <br/>
+          <button id="chats-send-group-message">Send</button>
+        </div>
+      </div>
+      <div class="messages">
+        <h3>Messages</h3>
+        <div class="message">
+          <span class="forwarded-message-tag">forwared message</span>
+          demo message <span class="chat-name-tag">wolfpack</span>
+          <span class="forward-message-input-group">
+            <input type="text" name="" id="" class="forward-message-input" />
+            <button id="">Forward</button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="/assets/js/constants.js"></script>
+  <script src="/assets/js/classes.js"></script>
+  <script src="/assets/js/variables.js"></script>
+  <script src="/assets/js/functions.js"></script>
+  <script src="/assets/js/scripts.js"></script>
+</body>
+</html>

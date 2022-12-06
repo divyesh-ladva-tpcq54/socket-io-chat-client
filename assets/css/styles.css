@@ -1,0 +1,71 @@
+*, *::after, *::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#root {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  height: 100vh;
+  gap: 1em;
+  background-color: antiquewhite;
+  justify-content: space-around;
+  padding: 1em 1em;
+  flex-wrap: wrap;
+}
+
+#root > div {
+  background-color: white;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+#personal-chats {
+  flex: 1;
+}
+
+#group-chats {
+  flex: 1;
+}
+
+#user-info {
+  flex-basis: 100%;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.messages {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  flex: 1;
+  gap: 5px;
+}
+.chat-name-tag, .forwarded-message-tag {
+  font-size: 12px;
+  border-radius: 10px;
+  padding: 1px 5px;
+}
+
+.chat-name-tag {
+  color: white;
+  background-color: green;
+}
+
+.forwarded-message-tag {
+  color: yellow;
+  background-color: black;
+}
+
+button {
+  padding: 2px 5px;
+}
