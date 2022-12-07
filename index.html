@@ -44,11 +44,19 @@
     <div id="group-chats">
       <div class="controls">
         <div class="control-group">
-          <h3>Join Groups</h3>
-          <input type="text" name="control-group-chat-name" id="control-group-chat-name">
-          <br/><button id="control-group-chat-create">Create</button>
+          <h3>Groups control area</h3>
+          <input type="text" name="control-group-chat-name" id="control-group-chat-name" placeholder="group's name">
+          <input type="text" name="control-group-chat-member-name" id="control-group-chat-member-name" placeholder="username">
+          <br/>
+          <button id="control-group-chat-create">Create</button>
           <button id="control-group-chat-join">Join</button>
           <button id="control-group-chat-leave">Leave</button>
+          <br/>
+          <button id="control-group-chat-member-add">Add member</button>
+          <button id="control-group-chat-member-remove">Remove member</button>
+          <br/>
+          <button id="control-group-chat-member-assign-admin">Assign admin</button>
+          <button id="control-group-chat-member-unassign-admin">Unassign admin</button>
         </div>
         <div class="control-group">
           <h3>Group Chats</h3>
@@ -56,7 +64,7 @@
           <br/>
           <input type="text" name="chats-group-chat-message" placeholder="message" id="chats-group-chat-message">
           <br/>
-          <button id="chats-send-group-message">Send</button>
+          <button id="control-group-chat-send">Send</button>
         </div>
       </div>
       <div class="messages">

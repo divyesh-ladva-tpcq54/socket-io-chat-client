@@ -27,5 +27,27 @@ $(function () {
     e.preventDefault();
 
     sendPrivateMessage($("#chats-pm-chat-message").val(), $("#chats-pm-chat-name").val());
-  })
+  });
+
+  // group create button click event
+  $("#control-group-chat-create").on("click", function (e) {
+    e.preventDefault();
+
+    createGroup($("#control-group-chat-name").val());
+  });
+
+  // group add member button click event\
+  $("#control-group-chat-member-add").on("click", function (e) {
+    e.preventDefault();
+
+    addMemberToGroup($("#control-group-chat-member-name").val(), $("#control-group-chat-name").val());
+  });
+
+  // group message send button click event
+  $("#control-group-chat-send").on("click", function (e) {
+    e.preventDefault();
+
+    sendGroupMessage($("#chats-group-chat-message").val(), $("#chats-group-chat-name").val());
+  });
+
 })

@@ -28,7 +28,11 @@ function SocketManager() {
 
     this.socket.on(SocketEvents.privateMessage, function (data) {
       appendMessageHtml(getMessageHtml(data.messages), getPrivateMessageContainer())
-    })
+    });
+
+    this.socket.on(SocketEvents.groupMessage, function (data) {
+      appendMessageHtml(getMessageHtml(data.messages), getGroupMessageContainer())
+    });
   }
 
   this.emitEvent = function (event, data) {

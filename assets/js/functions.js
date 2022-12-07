@@ -71,6 +71,11 @@ function getPrivateMessageContainer() {
   return e;
 }
 
+function getGroupMessageContainer() {
+  var e = "div#" + groupMessageContainerRootId + " > ." + messageContainerClass; 
+  return e;
+}
+
 function getSystemMessageContainer() {
   var e = "div#" + systemMessageContainerRootId + " > ." + messageContainerClass; 
   return e;
@@ -110,6 +115,7 @@ function createForwardInputHtml(messageId) {
 
   // forward button html
   var button = document.createElement('button');
+  button.innerText = 'Forward'
   button.type = 'text';
   button.dataset.messageId = messageId;
   button.className = 'forward-forward-message';
@@ -134,8 +140,8 @@ function createMessageHtml(message) {
   }
   
   // show forward option only if 
-  if (message.sender.isAdmin) {
-    message.append(createForwardInputHtml(message.id))
+  if (!message.sender.isAdmin) {
+    messageHolder.append(createForwardInputHtml(message.id))
   }
 
   return messageHolder;
@@ -151,12 +157,44 @@ function getMessageHtml(messageData) {
   return messageHtml.innerHTML;
 }
 
-function validateRegisterUser(username) {
-  if (!username) {
+function validateEmpty(value) {
+  if (!value) {
     return false;
   }
 
-  if (!username.trim()) {
+  if (!value.trim()) {
+    return false;
+  }
+
+  return true;
+}
+
+function validateRegisterUser(username) {
+  if (!validateEmpty(username)) {
+    return false;
+  }
+
+  return true;
+}
+
+function validateMessage(message) {
+  if (!validateEmpty(message)) {
+    return false;
+  }
+
+  return true;
+}
+
+function validateGroupName(name) {
+  if (!validateEmpty(name)) {
+    return false;
+  }
+
+  return true;
+}
+
+function validateSender(name) {
+  if (!validateEmpty(name)) {
     return false;
   }
 
@@ -236,30 +274,6 @@ function logoutUser() {
   unsetUserDataCookies()
 }
 
-function validateMessage(message) {
-  if (!message) {
-    return false;
-  }
-
-  if (!message.trim()) {
-    return false;
-  }
-
-  return true;
-}
-
-function validateSender(username) {
-  if (!username) {
-    return false;
-  }
-
-  if (!username.trim()) {
-    return false;
-  }
-
-  return true;
-}
-
 function forwardMessageToGroup(messageId, groupName) {
 
 }
@@ -296,12 +310,60 @@ function sendPrivateMessage(message, to) {
   sendPrivateMessageAjax(message, to);
 }
 
-function sendGroupMessage(message, groupName) {
+function sendGroupMessageAjax(message, groupName) {
+  var data = {
+    message: message,
+    groupName: groupName,
+    sender: user
+  }
 
+  emitEvent(SocketEvents.groupMessage, data);
+}
+
+function sendGroupMessage(message, groupName) {
+  if (!validateMessage(message)) {
+    alert("Invalid Message");
+    return;
+  }
+
+  if (!validateSender(groupName)) {
+    alert("Group name is invalid");
+    return;
+  }
+
+  if (!user) {
+    alert("user not logged in");
+    return;
+  }
+
+  sendGroupMessageAjax(message, groupName);
+}
+
+function validateGroupName(name) {
+  return (name && name.trim() != "")
+}
+
+function createGroupAjax(name) {
+  var data = {
+    groupName: name,
+    user: user
+  }
+
+  emitEvent(SocketEvents.groupCreate, data);
 }
 
 function createGroup(name) {
+  if (!user) {
+    alert("user not logged in");
+    return;
+  }
 
+  if (!validateGroupName(name)) {
+    alert("invalid group name");
+    return;
+  }
+
+  createGroupAjax(name);
 }
 
 function joinGroup(name) {
@@ -310,4 +372,32 @@ function joinGroup(name) {
 
 function leaveGroup(name) {
 
+}
+
+function addMemberToGroupAjax(username, groupName) {
+  var data = {
+    groupName: groupName,
+    username: username
+  }
+
+  emitEvent(SocketEvents.groupMemberAdd, data)
+}
+
+function addMemberToGroup(username, groupName) {
+  if (!validateGroupName(groupName)) {
+    alert("group name is invalid");
+    return;
+  }
+
+  if (!validateSender(username)) {
+    alert("username is invalid");
+    return;
+  }
+
+  if (!user) {
+    alert("user not logged in");
+    return;
+  }
+
+  addMemberToGroupAjax(username, groupName);
 }
